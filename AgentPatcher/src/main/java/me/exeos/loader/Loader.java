@@ -11,6 +11,8 @@ public class Loader {
             args[i] = args[i].replace("\\", "/");
         }
 
+        System.out.println("starting patch...");
         new AgentPatcher(args[0], args[1]).patch();
+        System.out.println("done!");
     }
 }
