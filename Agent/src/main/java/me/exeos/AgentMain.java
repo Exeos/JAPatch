@@ -2,6 +2,7 @@ package me.exeos;
 
 import java.io.IOException;
 import java.lang.instrument.Instrumentation;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
 public class AgentMain {
@@ -11,15 +12,9 @@ public class AgentMain {
     }
 
     public static void agentmain(String agentArgs, Instrumentation instrumentation) {
-        if (agentArgs == null) {
-            throw new IllegalArgumentException("Please provide path to patcher jar");
-        }
-
-        agentArgs = agentArgs.replace("\\", "/");
-
         try {
-            PatcherLoader.loadPatcherPack(Paths.get(agentArgs));
-        } catch (IOException e) {
+            PatcherLoader.loadPatcherPack(Paths.get(AgentMain.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath().substring(1)));
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Failed to load patcher pack");
             throw new RuntimeException(e);
         }
