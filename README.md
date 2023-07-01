@@ -1,5 +1,5 @@
 # JAPatch
-A tool to convert your static modifications into agent patcher
+A tool to convert your static modifications into agent, patching at runtime
 
 how to use:
 
